@@ -25,6 +25,9 @@ Route::resource('user','UserController');
 Route::get('usr','UserController@userget');
 Route::post('usr/up/{id}','UserController@userUpdate')->name('user.val.update');
 Route::get('user/del/{id}','UserController@del');
-Route::get('promotion','PromotionController@create');
+Route::get('promotionlist/','PromotionController@promotionlist');
+Route::get('promotion/','PromotionController@create');
+Route::post('addpromotion/','PromotionController@addpromotion');
+
 Route::post('user/get/yajra','UserTableController');
 

@@ -6,23 +6,24 @@
   <title>AdminLTE 2 | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css')}}">
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.min.css')}}">
+  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="{{ asset('dist/css/skins/_all-skins.min.css')}}">
+  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
   <!-- Morris chart -->
-  <link rel="stylesheet" href="{{ asset('bower_components/morris.js/morris.css')}}">
+  <link rel="stylesheet" href="bower_components/morris.js/morris.css">
   <!-- jvectormap -->
  
   <!-- Date Picker -->
-  <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
+  <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- Daterange picker -->
-  <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
+  <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">
   <!-- bootstrap wysihtml5 - text editor -->
 
 
@@ -93,9 +94,15 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="{{url('usr')}}"><i class="fa fa-circle-o"></i>User Managment</a></li>
+            <li class="active"><a href="{{url('/usr/get/val')}}"><i class="fa fa-circle-o"></i>User Managment</a></li>
+            <li class="active"><a href="{{url('/promotion/get')}}"><i class="fa fa-circle-o"></i>Promotion Managment</a></li>
+            <li class="active"><a href="{{url('promotion')}}"><i class="fa fa-circle-o"></i>Promotion Create</a></li>
           </ul>
         </li>
+
+
+        
+
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -104,43 +111,39 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Quick Example</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-           <div class="box-body">
-              <form role="form" method="POST" action="/addpromotion" enctype="multipart/form-data">
-                    {{ csrf_field() }}
+    <section class="content-header">
+      <h1>
+        Dashboard
+        <small>Control panel</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
+    </section>
+   <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">User Managment</h3>
+        </div><!-- /.box-header -->
 
-                <!-- text input -->
-                <div class="form-group">
-                  <label>Title</label>
-                  <input type="text" name="title" class="form-control" placeholder="Enter Title" required="">
-                </div>
-                <div class="form-group">
-                  <label>Description</label>
-                  <input type="text" name="description" class="form-control" placeholder="Enter Description" required="">
-                </div>
-                <div class="form-group">
-                  <label>Link</label>
-                  <input type="text" name="link" class="form-control" placeholder="Enter Link" required="">
-                </div>
-                <div class="form-group">
-                  <label>Score</label>
-                  <input type="text" name="score" class="form-control" placeholder="Enter Score" required="">
-                </div>
-                <div class="form-group">
-                  <label>Image</label>
-                  <input type="file" name="file" class="form-control" placeholder="Enter Score" required="">
-                </div>
-                <input type="submit" name="submit" class="btn btn-primary">
-              </form>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          </div>
+        <div class="box-body">
+            <div class="table-responsive">
+                <table id="users-table" class="table table-condensed table-hover">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div><!--table-responsive-->
+        </div><!-- /.box-body -->
+    </div><!--box-->
+    <!-- Main content -->
+
+    
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
@@ -348,15 +351,39 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="{{ asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 
 <!-- Bootstrap 3.3.7 -->
-<script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
 <!-- AdminLTE App -->
-<script src="{{ asset('dist/js/adminlte.min.js')}}"></script>
+<script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+ <script src="https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.js"></script>
+     <script src="js/backend/plugin/datatables/dataTables-extend.js"></script>
 
+    <script>
+        $(function () {
+            $('#users-table').DataTable({
+                data: [
+                @if (count($promotions) != 0) 
+                  @foreach($promotions as $value)
+                    ['{{$value->id}}','{{$value->title}}','{{$value->description}}','{{$value->link}}','{{$value->score}}'],
+                  @endforeach
+                @endif
+                ],
+                columns: [
+                    {data: 'id', name: 'id'},
+                    {data: 'title', name: 'title'},
+                    {data: 'description', name: 'description'},
+                    {data: 'link', name: 'link'},
+                    {data: 'score', name: 'score', searchable: false, sortable: false}
+                ],
+                order: [[0, "asc"]],
+                searchDelay: 500
+            });
+        });
+    </script>
 </body>
 </html>
