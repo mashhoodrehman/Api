@@ -36,7 +36,7 @@ class UserTableController extends Controller
         // )
             ->addColumn(
                 'actions', function ($user) {
-                    return '<button class="btn btn-primary"><a href="user/'.$user->id.'/edit">Heloo</a></button>  <button class="btn btn-danger"><a href="/user/del/'.$user->id.'">Heloo</a></button>  ';
+                    return '<a class="btn btn-primary" href="user/'.$user->id.'/edit">Edit</a> <a class="btn btn-danger" href="/user/del/'.$user->id.'">Delete</a>  ';
                 }
             )
             ->rawColumns(['actions']

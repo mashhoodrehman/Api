@@ -94,8 +94,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="{{url('/usr/get/val')}}"><i class="fa fa-circle-o"></i>User Managment</a></li>
-            <li class="active"><a href="{{url('/promotion/get')}}"><i class="fa fa-circle-o"></i>Promotion Managment</a></li>
+            <li class="active"><a href="{{url('/usr')}}"><i class="fa fa-circle-o"></i>All Users</a></li>
             <li class="active"><a href="{{url('promotion')}}"><i class="fa fa-circle-o"></i>Promotion Create</a></li>
           </ul>
         </li>
