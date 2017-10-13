@@ -30,4 +30,7 @@ Route::get('promotion/','PromotionController@create');
 Route::post('addpromotion/','PromotionController@addpromotion');
 
 Route::post('user/get/yajra','UserTableController');
+Route::post('adduser','UserController@store');
+Route::get('/','UserController@login');
+Route::post('/adminLogin','UserController@checkLogin');
 

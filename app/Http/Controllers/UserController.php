@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Contracts\Auth\Guard;
+
+use App\Http\Requests\Auth\LoginRequest;
 
 class UserController extends Controller
 {
@@ -24,7 +27,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('userCreate');
+    }
+    public function login(){
+        return view('login');
     }
 
     /**
@@ -35,7 +41,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User;
+        $user->name = $request->name;     
+        $user->email = $request->email;    
+        $password = bcrypt($request->password); 
+        $user->password = $request->password;
+        $user->save();
+        return redirect()->back();     
     }
 
     /**
@@ -102,5 +114,11 @@ class UserController extends Controller
     }
     public function userget(){
         return view('user');
+    }
+    public function checkLogin(Request $request){
+        dd($this->auth->attempt($request->only('email', 'password')));
+        $credentials = $request->only(['email', 'password']);
+        $val = $JWTAuth->attempt($credentials);
+        dd($val);
     }
 }
