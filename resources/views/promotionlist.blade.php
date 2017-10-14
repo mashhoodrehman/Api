@@ -131,11 +131,24 @@
                     <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Name</th>
-                        <th>Email</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Score</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
+                    <tbody>
+                      <tr>
+                        @foreach($promotions as $promotion )
+                        <td>{{$promotion->id}}</td>
+                        <td>{{$promotion->title}}</td>
+                        <td>{{$promotion->description}}</td>
+                        <td>{{$promotion->link}}</td>
+                        <td>{{$promotion->score}}</td>
+                        <td><a class="btn btn-primary" href="editprom/{{$promotion->id}}">Edit</a> <a class="btn btn-danger" href="delprom/{{$promotion->id}}">Del</a></td>
+                      </tr>
+                      @endforeach
+                    </tbody>
                 </table>
             </div><!--table-responsive-->
         </div><!-- /.box-body -->
@@ -361,28 +374,5 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
  <script src="https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.js"></script>
      <script src="js/backend/plugin/datatables/dataTables-extend.js"></script>
-
-    <script>
-        $(function () {
-            $('#users-table').DataTable({
-                data: [
-                @if (count($promotions) != 0) 
-                  @foreach($promotions as $value)
-                    ['{{$value->id}}','{{$value->title}}','{{$value->description}}','{{$value->link}}','{{$value->score}}'],
-                  @endforeach
-                @endif
-                ],
-                columns: [
-                    {data: 'id', name: 'id'},
-                    {data: 'title', name: 'title'},
-                    {data: 'description', name: 'description'},
-                    {data: 'link', name: 'link'},
-                    {data: 'score', name: 'score', searchable: false, sortable: false}
-                ],
-                order: [[0, "asc"]],
-                searchDelay: 500
-            });
-        });
-    </script>
 </body>
 </html>

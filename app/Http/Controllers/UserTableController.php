@@ -27,7 +27,7 @@ class UserTableController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $user = User::all();
+        $user = User::where('role',null)->get();
          return Datatables::of($user)
         // ->editColumn(
         //     'confirmed', function ($user) {
@@ -39,7 +39,12 @@ class UserTableController extends Controller
                     return '<a class="btn btn-primary" href="user/'.$user->id.'/edit">Edit</a> <a class="btn btn-danger" href="/user/del/'.$user->id.'">Delete</a>  ';
                 }
             )
-            ->rawColumns(['actions']
+            ->addColumn(
+                'status', function ($user) {
+                    return '<a class="btn btn-primary" href="changestatus/'.$user->id.'">'.$user->status.'</a>';
+                }
+            )
+            ->rawColumns(['actions','status']
             )
             ->make(true);
     }

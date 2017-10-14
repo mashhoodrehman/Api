@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Contracts\Auth\Guard;
-
+use Hash;
 use App\Http\Requests\Auth\LoginRequest;
 
 class UserController extends Controller
@@ -27,7 +27,13 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('userCreate');
+         $user = User::find(19);
+        return view('userCreate',compact('user'));
+    }
+     public function change()
+    {
+         $user = User::find(19);
+        return view('userChange',compact('user'));
     }
     public function login(){
         return view('login');
@@ -70,7 +76,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('editUser',compact('user'));
+         $admin = User::find(19);
+        return view('editUser',compact('admin','user'));
     }
 
     /**
@@ -91,7 +98,7 @@ class UserController extends Controller
        $user = User::find($id);
        $user->name = $request->name;
        $user->save();
-       return redirect()->back();
+       return redirect('/usr');
     }
 
     /**
@@ -104,7 +111,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->destroy();
-        return redirect()->back();
+        return redirect('usr');
     }
      public function del($id)
     {
@@ -113,12 +120,32 @@ class UserController extends Controller
         return redirect()->back();
     }
     public function userget(){
-        return view('user');
+        $user = User::find(19);
+        return view('user',compact('user'));
     }
     public function checkLogin(Request $request){
         dd($this->auth->attempt($request->only('email', 'password')));
         $credentials = $request->only(['email', 'password']);
         $val = $JWTAuth->attempt($credentials);
         dd($val);
+    }
+    public function updateUser(Request $request){
+        $user = User::find(19);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+        return redirect('/');
+
+    }
+    public function changestatus($id){
+        $user = User::find($id);
+        if($user->status == "on"){
+            $user->status = "off";
+        }
+        else{
+            $user->status = "on";
+        }
+        $user->save();
+        return redirect('/usr');
     }
 }

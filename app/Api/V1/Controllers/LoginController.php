@@ -24,9 +24,7 @@ class LoginController extends Controller
             $token = $JWTAuth->attempt($credentials);
             $user = $JWTAuth->toUser($token);
             if($user->role == "admin"){
-                $value =  session('usr', $user);
-                dd($value = session('usr'));
-            return view('user');
+            return redirect('/usr');
             }
             if(!$token) {
                 throw new AccessDeniedHttpException();

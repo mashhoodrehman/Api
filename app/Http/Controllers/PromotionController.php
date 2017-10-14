@@ -9,6 +9,7 @@ use App\User;
 use Redirect;
 use Auth;
 use Validator;
+
 use App\Http\Controllers\Controller;
 
 class PromotionController extends Controller
@@ -16,6 +17,28 @@ class PromotionController extends Controller
     public function create() {
     	return view('promotionCreate');
     }
+
+    public function editProm($id){
+        $promotion = promotion::find($id);
+        return view('promotionUpdate',compact('promotion'));
+    }
+
+    public function updateProm(Request $request){
+        $promotion = promotion::find($request->id);
+        $promotion->title = $request->title;
+            $promotion->description = $request->description;
+            $promotion->link = $request->link;
+            $promotion->score = $request->score;
+            $promotion->save();
+            return redirect('usr');
+    }
+    public function delProm($id){
+        $promotion = promotion::find($id);
+        $promotion->delete();
+            return redirect('usr');
+    }
+    
+
 
     public function addpromotion(Request $request)
     {
@@ -50,8 +73,6 @@ class PromotionController extends Controller
 
     public function promotionlist()
     {
-        $value = config('app.id');
-        dd($value);
     	$promotions = promotion::all();
 
     	return view('promotionlist', compact('promotions'));

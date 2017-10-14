@@ -107,6 +107,7 @@
     <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Quick Example</h3>
+               <a href="/promotionlist"> <button class="btn btn-primary pull-right">Promotion List</button></a>
             </div>
             <!-- /.box-header -->
             <!-- form start -->

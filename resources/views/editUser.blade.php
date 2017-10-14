@@ -64,11 +64,9 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="" alt="User Image">
         </div>
-        <div class="pull-left info">
-          <p>Alexander Pierce</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        <div class="pull-left info">@if($admin){{$admin->name}}@endif
         </div>
       </div>
       <!-- search form -->
@@ -93,9 +91,14 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="{{url('usr')}}"><i class="fa fa-circle-o"></i>User Managment</a></li>
+            <li class="active"><a href="{{url('/usr')}}"><i class="fa fa-circle-o"></i>All Users</a></li>
+            <li class="active"><a href="{{url('promotion')}}"><i class="fa fa-circle-o"></i>Promotion Create</a></li>
           </ul>
         </li>
+
+
+        
+
       </ul>
     </section>
     <!-- /.sidebar -->
