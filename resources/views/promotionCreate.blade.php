@@ -112,7 +112,7 @@
             <!-- /.box-header -->
             <!-- form start -->
            <div class="box-body">
-              <form role="form" method="POST" action="/addpromotion" enctype="multipart/form-data">
+              <form role="form" method="POST" action="addpromotion" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
                 <!-- text input -->
