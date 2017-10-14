@@ -33,6 +33,9 @@ class LoginController extends Controller
         } catch (JWTException $e) {
             throw new HttpException(500);
         }
+        if($user->status == "off"){
+               return response()->json(["responseCode" => 50, "message" => "User Not Active"]);
+        }
 
         return response()
             ->json([
