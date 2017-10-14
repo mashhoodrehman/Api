@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 Route::resource('user','UserController');
 
-Route::get('usr','UserController@userget');
+Route::get('/usr','UserController@userget');
 Route::post('usr/up/{id}','UserController@userUpdate')->name('user.val.update');
 Route::get('user/del/{id}','UserController@del');
 Route::get('promotionlist/','PromotionController@promotionlist');
@@ -32,5 +32,7 @@ Route::post('addpromotion/','PromotionController@addpromotion');
 Route::post('user/get/yajra','UserTableController');
 Route::post('adduser','UserController@store');
 Route::get('/','UserController@login');
+Route::get('/createuser','UserController@create');
 Route::post('/adminLogin','UserController@checkLogin');
+
 

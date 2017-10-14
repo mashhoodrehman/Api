@@ -50,6 +50,8 @@ class PromotionController extends Controller
 
     public function promotionlist()
     {
+        $value = config('app.id');
+        dd($value);
     	$promotions = promotion::all();
 
     	return view('promotionlist', compact('promotions'));

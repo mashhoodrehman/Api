@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Api\V1\Requests\LoginRequest;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use session;
 // use App\User;
 
 class LoginController extends Controller
@@ -21,6 +22,12 @@ class LoginController extends Controller
 
         try {
             $token = $JWTAuth->attempt($credentials);
+            $user = $JWTAuth->toUser($token);
+            if($user->role == "admin"){
+                $value =  session('usr', $user);
+                dd($value = session('usr'));
+            return view('user');
+            }
             if(!$token) {
                 throw new AccessDeniedHttpException();
             }

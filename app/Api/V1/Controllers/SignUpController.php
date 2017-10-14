@@ -17,7 +17,9 @@ class SignUpController extends Controller
         if(!$user->save()) {
             throw new HttpException(500);
         }
-
+        if($user->type == "backend"){
+        return redirect('/usr');
+        }
         if(!Config::get('boilerplate.sign_up.release_token')) {
             return response()->json([
                 'status' => 'ok'

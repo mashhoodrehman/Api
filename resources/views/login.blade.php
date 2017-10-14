@@ -42,7 +42,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
 
-    <form action="/adminLogin" method="post">
+    <form action="/api/auth/login" method="post">
        {{ csrf_field() }}
       <div class="form-group has-feedback">
         <input type="email" class="form-control" name="email" placeholder="Email">

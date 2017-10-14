@@ -111,7 +111,7 @@
             <!-- /.box-header -->
             <!-- form start -->
            <div class="box-body">
-              <form role="form" method="POST" action="adduser" enctype="multipart/form-data">
+              <form role="form" method="POST" action="/api/auth/signup" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
                 <!-- text input -->
@@ -125,12 +125,13 @@
                 </div>
                 <div class="form-group">
                   <label>Password</label>
-                  <input type="text" name="link" class="form-control" placeholder="Enter Password" required="">
+                  <input type="text" name="password" class="form-control" placeholder="Enter Password" required="">
                 </div>
                 <div class="form-group">
                   <label>Confirm Password</label>
                   <input type="text" name="password_confirmation" class="form-control" placeholder="Confirm Password" required="">
                 </div>
+                <input type="hidden" name="type" value="backend">
                 <input type="submit" name="submit" class="btn btn-primary">
               </form>
             </div>
