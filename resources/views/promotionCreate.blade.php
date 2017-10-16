@@ -51,9 +51,49 @@
       <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
       </a>
 
       <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+         
+          <!-- Notifications: style can be found in dropdown.less -->
+         
+          <!-- Tasks: style can be found in dropdown.less -->
+         
+          <!-- User Account: style can be found in dropdown.less -->
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <span class="hidden-xs">@if($user){{$user->name}}@endif</span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+                <p>
+                 >@if($user){{$user->name}}@endif
+                </p>
+              </li>
+              <!-- Menu Body -->
+             
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="/changePass" class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="/" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <!-- Control Sidebar Toggle Button -->
+        </ul>
       </div>
     </nav>
   </header>
@@ -64,11 +104,9 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img alt="User Image">
         </div>
-        <div class="pull-left info">
-          <p>Alexander Pierce</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        <div class="pull-left info">@if($user){{$user->name}}@endif
         </div>
       </div>
       <!-- search form -->
@@ -93,9 +131,14 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="{{url('usr')}}"><i class="fa fa-circle-o"></i>User Managment</a></li>
+            <li class="active"><a href="{{url('/usr')}}"><i class="fa fa-circle-o"></i>All Users</a></li>
+            <li class="active"><a href="{{url('promotion')}}"><i class="fa fa-circle-o"></i>Promotion Create</a></li>
           </ul>
         </li>
+
+
+        
+
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -107,7 +150,7 @@
     <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Quick Example</h3>
-               <a href="/promotionlist"> <button class="btn btn-primary pull-right">Promotion List</button></a>
+               <a href="promotionlist"> <button class="btn btn-primary pull-right">Promotion List</button></a>
             </div>
             <!-- /.box-header -->
             <!-- form start -->

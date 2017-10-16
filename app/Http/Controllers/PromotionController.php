@@ -15,12 +15,14 @@ use App\Http\Controllers\Controller;
 class PromotionController extends Controller
 {
     public function create() {
-    	return view('promotionCreate');
+        $user = User::find(19);
+    	return view('promotionCreate',compact('user'));
     }
 
     public function editProm($id){
         $promotion = promotion::find($id);
-        return view('promotionUpdate',compact('promotion'));
+        $user = User::find(19);
+        return view('promotionUpdate',compact('promotion','user'));
     }
 
     public function updateProm(Request $request){
@@ -74,7 +76,7 @@ class PromotionController extends Controller
     public function promotionlist()
     {
     	$promotions = promotion::all();
-
-    	return view('promotionlist', compact('promotions'));
+        $user = User::find(19);
+    	return view('promotionlist', compact('promotions','user'));
 	}
 }
