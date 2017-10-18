@@ -14,22 +14,36 @@ class SignUpController extends Controller
     public function signUp(SignUpRequest $request, JWTAuth $JWTAuth)
     {
         $user = new User($request->all());
-        if(!$user->save()) {
+        $api_token = str_random(60);
+        $user->api_token = $api_token;
+        $email = User::where('email',$user->email)->first();
+        if($email){
+            return response()
+            ->json([
+                "responseCode" => 500,
+                'message' => 'Signup Failed!'
+            ]);
+        }
+         if(!$user->save()) {
             throw new HttpException(500);
         }
         if($user->type == "backend"){
         return redirect('/usr');
         }
         if(!Config::get('boilerplate.sign_up.release_token')) {
-            return response()->json([
-                'status' => 'ok'
-            ], 201);
+           return response()
+            ->json([
+                "responseCode" => 200,
+                'message' => 'Signup Successfuly!',"token"=>$api_token
+            ]);
         }
 
         $token = $JWTAuth->fromUser($user);
-        return response()->json([
-            'status' => 'ok',
-            'token' => $token
-        ], 201);
+        
+        return response()
+            ->json([
+                "responseCode" => 200,
+                'message' => 'Signup Successfuly!',"token"=>$api_token
+            ]);
     }
 }

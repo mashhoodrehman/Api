@@ -25,8 +25,10 @@ class ResetPasswordController extends Controller
         }
 
         if(!Config::get('boilerplate.reset_password.release_token')) {
-            return response()->json([
-                'status' => 'ok',
+            return response()
+            ->json([
+                "responseCode" => 200,
+                'message' => 'Email Sent!'
             ]);
         }
 

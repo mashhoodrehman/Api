@@ -9,25 +9,47 @@ use App\Api\V1\Requests\LoginRequest;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use session;
-// use App\User;
+use Illuminate\Http\Request;
+use App\User;
 
 class LoginController extends Controller
 {
     // public function _construct(){
 
     // }
-    public function login(LoginRequest $request, JWTAuth $JWTAuth)
+    public function login(Request $request, JWTAuth $JWTAuth)
     {
         $credentials = $request->only(['email', 'password']);
+        if(isset($request->fb_login)){
+            $user = User::where('social_login',$request->fb_login)->first();
+            if(isset($user->social_login)){
+                return response()->json(["responseCode" => 200, "message" => "Logged in successull","token"=>$user->api_token]);
+            }
+            else{
+                $user = new User;
+                $user->social_login = $request->fb_login;
+                $user->name = $request->name;
+                $api_token = str_random(60);
+                $user->api_token = $api_token;
+                $user->save();
+                return response()->json(["responseCode" => 200, "message" => "Logged in successull","token"=>$user->api_token]);
+            }
+        }
 
         try {
             $token = $JWTAuth->attempt($credentials);
+            if($token){
             $user = $JWTAuth->toUser($token);
             if($user->role == "admin"){
             return redirect('/usr');
             }
+            }
             if(!$token) {
-                throw new AccessDeniedHttpException();
+                 return response()
+                ->json([
+                "responseCode" => 500,
+                'message' => 'Login Failed!'
+            ]);
             }
 
         } catch (JWTException $e) {
@@ -39,8 +61,8 @@ class LoginController extends Controller
 
         return response()
             ->json([
-                'status' => 'ok'
-                // 'token' => $token
+                "responseCode" => 200,
+                'message' => 'Login Successfuly!',"token"=>$user->api_token
             ]);
 
              // return response()->json(["responseCode" => 200, "message" => "Logged in successull", "response" => $user]);

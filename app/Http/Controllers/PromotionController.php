@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\promotion;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use App\user_score;
 use Redirect;
 use Auth;
 use Validator;
@@ -79,4 +80,27 @@ class PromotionController extends Controller
         $user = User::find(19);
     	return view('promotionlist', compact('promotions','user'));
 	}
+    public function getPromotion(){
+        $promotion = Promotion::all();
+        return response()->json(["responseCode" => 200, "message" => "All Promotions","promotion"=> $promotion]);
+    }
+    public function userScore(Request $request){
+
+        $promotion = user_score::where('profile_id',$request->profile_id)->first();
+        if(isset($promotion->profile_id)){
+            $promotion->total_score = $request->scores;
+            $promotion->save();
+            return response()->json(["responseCode" => 200, "message" => "Score Updated"]);
+        }
+        else{
+            $promotion = new user_score;
+            $promotion->profile_id = $request->profile_id;
+            $promotion->total_score = $request->scores;
+            $promotion->save();
+            return response()->json(["responseCode" => 200, "message" => "Score Saved"]);
+        }
+        
+    }
+
+
 }

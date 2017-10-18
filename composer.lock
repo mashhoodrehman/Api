@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0c2bfbf5dd09757fe32a786471d14fe0",
-    "content-hash": "3ffd608a01f8881b7ef3eeb85e95d5fe",
+    "hash": "4a7a387677aeefcdc103faffb4b575bb",
+    "content-hash": "7a9c5789d59b2b27a662dfd66279557f",
     "packages": [
         {
             "name": "barryvdh/laravel-cors",
@@ -62,16 +62,16 @@
         },
         {
             "name": "bestmomo/nice-artisan",
-            "version": "V1.1.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bestmomo/nice-artisan.git",
-                "reference": "90eaa56dcc56f0d7f1994ba9eec76d932158a49f"
+                "reference": "48d2c39704c8156b2ee1c46b0a6b32fc8df20096"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bestmomo/nice-artisan/zipball/90eaa56dcc56f0d7f1994ba9eec76d932158a49f",
-                "reference": "90eaa56dcc56f0d7f1994ba9eec76d932158a49f",
+                "url": "https://api.github.com/repos/bestmomo/nice-artisan/zipball/48d2c39704c8156b2ee1c46b0a6b32fc8df20096",
+                "reference": "48d2c39704c8156b2ee1c46b0a6b32fc8df20096",
                 "shasum": ""
             },
             "require": {
@@ -79,13 +79,6 @@
                 "php": ">=5.6.4"
             },
             "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Bestmomo\\NiceArtisan\\NiceArtisanServiceProvider"
-                    ]
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Bestmomo\\NiceArtisan\\": "src/"
@@ -104,7 +97,7 @@
             ],
             "description": "Web interface for Laravel Artisan",
             "homepage": "http://github.com/bestmomo/nice-artisan",
-            "time": "2017-10-08 15:29:38"
+            "time": "2017-09-01 20:13:20"
         },
         {
             "name": "dingo/api",

@@ -19,6 +19,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('socila_login');
             $table->string('password');
+            $table->string('type');
+            $table->string('role');
+            $table->string('api_token');
+            $table->enum('status', ['on', 'off']);
             $table->rememberToken();
             $table->timestamps();
         });

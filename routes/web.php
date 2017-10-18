@@ -30,6 +30,8 @@ Route::get('editprom/{id}','PromotionController@editProm');
 Route::get('delprom/{id}','PromotionController@delProm');
 Route::post('updateprom','PromotionController@updateProm');
 Route::get('promotion/','PromotionController@create');
+Route::post('userscore/','PromotionController@userScore');
+Route::get('promotionget/','PromotionController@getPromotion');
 Route::post('addpromotion/','PromotionController@addpromotion');
 
 Route::post('user/get/yajra','UserTableController');
