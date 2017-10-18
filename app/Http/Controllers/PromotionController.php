@@ -87,6 +87,11 @@ class PromotionController extends Controller
     public function userScore(Request $request){
 
         $promotion = user_score::where('profile_id',$request->profile_id)->first();
+        if(isset($promotion->api_token)){
+        if($promotion->api_token != $request->api_token){
+            return response()->json(["responseCode" => 500, "message" => "Api Token Mismatch"]);
+        }
+        }
         if(isset($promotion->profile_id)){
             $promotion->total_score = $request->scores;
             $promotion->save();
@@ -96,6 +101,7 @@ class PromotionController extends Controller
             $promotion = new user_score;
             $promotion->profile_id = $request->profile_id;
             $promotion->total_score = $request->scores;
+            $promotion->api_token = $request->api_token;
             $promotion->save();
             return response()->json(["responseCode" => 200, "message" => "Score Saved"]);
         }

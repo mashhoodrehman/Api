@@ -17,6 +17,7 @@ class CreateUserScoresTable extends Migration
             $table->increments('id');
             $table->string('profile_id');
             $table->string('total_score');
+            $table->string('api_token');
             $table->timestamps();
         });
     }

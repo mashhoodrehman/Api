@@ -161,7 +161,7 @@
    <div class="box box-success">
         <div class="box-header with-border">
             <h3 class="box-title">User Managment</h3>
-            <a href="/createuser"> <button class="btn btn-primary pull-right">Create User</button></a>
+            <a href="createuser"> <button class="btn btn-primary pull-right">Create User</button></a>
         </div><!-- /.box-header -->
 
         <div class="box-body">
