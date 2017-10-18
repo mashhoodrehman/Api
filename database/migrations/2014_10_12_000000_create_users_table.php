@@ -17,11 +17,11 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('socila_login');
+            $table->string('social_login')->nullable();
             $table->string('password');
-            $table->string('type');
-            $table->string('role');
-            $table->string('api_token');
+            $table->string('type')->nullable();
+            $table->string('role')->nullable();
+            $table->string('api_token')->nullable();
             $table->enum('status', ['on', 'off']);
             $table->rememberToken();
             $table->timestamps();
