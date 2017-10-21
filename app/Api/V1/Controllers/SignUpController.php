@@ -4,6 +4,7 @@ namespace App\Api\V1\Controllers;
 
 use Config;
 use App\User;
+use App\user_score;
 use Tymon\JWTAuth\JWTAuth;
 use App\Http\Controllers\Controller;
 use App\Api\V1\Requests\SignUpRequest;
@@ -31,6 +32,11 @@ class SignUpController extends Controller
         return redirect('/usr');
         }
         if(!Config::get('boilerplate.sign_up.release_token')) {
+            $promotion = new user_score;
+            $promotion->profile_id = $user->id;
+            $promotion->total_score = "50";
+            $promotion->api_token = $user->api_token;
+            $promotion->save();
            return response()
             ->json([
                 "responseCode" => 200,
@@ -39,7 +45,6 @@ class SignUpController extends Controller
         }
 
         $token = $JWTAuth->fromUser($user);
-        
         return response()
             ->json([
                 "responseCode" => 200,

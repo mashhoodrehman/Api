@@ -176,6 +176,14 @@
                   <input type="text" name="score" class="form-control" placeholder="Enter Score" required="">
                 </div>
                 <div class="form-group">
+                  <label>Select Type</label>
+                  <select class="form-control" name="type">
+                    <option value="app">App</option>
+                    <option value="survey">Survey</option>
+                    <option value="video">Video</option>
+                  </select>
+                </div>
+                <div class="form-group">
                   <label>Image</label>
                   <input type="file" name="file" class="form-control" placeholder="Enter Score" required="">
                 </div>

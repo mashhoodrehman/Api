@@ -175,6 +175,14 @@
                   <label>Score</label>
                   <input type="text" name="score" class="form-control" placeholder="Enter Score" required="" value="{{$promotion->score}}">
                 </div>
+                 <div class="form-group">
+                  <label>Select Type</label>
+                  <select class="form-control" name="type">
+                    <option value="app" @if($promotion->type == "app") selected @endif>App</option>
+                    <option value="survey" @if($promotion->type == "survey") selected @endif>Survey</option>
+                    <option value="video" @if($promotion->type == "video") selected @endif>Video</option>
+                  </select>
+                </div>
                 <input type="submit" name="submit" class="btn btn-primary">
               </form>
             </div>

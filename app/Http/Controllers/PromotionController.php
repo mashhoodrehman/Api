@@ -32,6 +32,7 @@ class PromotionController extends Controller
             $promotion->description = $request->description;
             $promotion->link = $request->link;
             $promotion->score = $request->score;
+            $promotion->type = $request->type;
             $promotion->save();
             return redirect('usr');
     }
@@ -51,7 +52,8 @@ class PromotionController extends Controller
     		$promotion->title = $request->title;
     		$promotion->description = $request->description;
     		$promotion->link = $request->link;
-    		$promotion->score = $request->score;
+            $promotion->score = $request->score;
+    		$promotion->type = $request->type;
 
 			if (!empty($request->file)) 
 	        {
@@ -93,7 +95,7 @@ class PromotionController extends Controller
         }
         }
         if(isset($promotion->profile_id)){
-            $promotion->total_score = $request->scores;
+            $promotion->total_score += $request->scores;
             $promotion->save();
             return response()->json(["responseCode" => 200, "message" => "Score Updated"]);
         }
