@@ -11,6 +11,8 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use session;
 use Illuminate\Http\Request;
 use App\User;
+use Redirect;
+use App\user_score;
 
 class LoginController extends Controller
 {
@@ -32,7 +34,12 @@ class LoginController extends Controller
                 $api_token = str_random(60);
                 $user->api_token = $api_token;
                 $user->save();
-                return response()->json(["responseCode" => 200, "message" => "Logged in successull","token"=>$user->api_token]);
+                $promotion = new user_score;
+                $promotion->profile_id = $user->id;
+                $promotion->total_score = "50";
+                $promotion->api_token = $user->api_token;
+                $promotion->save();
+                return response()->json(["responseCode" => 200, "message" => "Logged in successull","token"=>$user->api_token,"scores"=>$promotion->total_score]);
             }
         }
 
@@ -45,6 +52,14 @@ class LoginController extends Controller
             }
             }
             if(!$token) {
+                if(isset($request->val) && $request->val == "admin"){
+                    return Redirect::back()->withErrors('msg','Your Credentials are nor correct');
+
+                   
+                }
+
+
+
                  return response()
                 ->json([
                 "responseCode" => 500,
@@ -58,11 +73,11 @@ class LoginController extends Controller
         if($user->status == "off"){
                return response()->json(["responseCode" => 50, "message" => "User Not Active"]);
         }
-
+        $score = user_score::where('api_token',$user->api_token)->first();
         return response()
             ->json([
                 "responseCode" => 200,
-                'message' => 'Login Successfuly!',"token"=>$user->api_token
+                'message' => 'Login Successfuly!',"token"=>$user->api_token,'scores' => $score->total_score
             ]);
 
              // return response()->json(["responseCode" => 200, "message" => "Logged in successull", "response" => $user]);

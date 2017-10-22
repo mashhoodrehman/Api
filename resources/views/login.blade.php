@@ -34,9 +34,16 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition login-page">
+  
+    @if($errors->has('msg'))
+    <div class="alert alert-danger">
+     {{$errors->first('msg')}}
+  </div>
+  @endif
+
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Admin</b>LTE</a>
+    <a href="/"><b>Admin</b>LTE</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
@@ -52,6 +59,7 @@
         <input type="password" class="form-control" placeholder="Password" name="password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
+      <input type="hidden" name="val" value="admin">
       <div class="row">
         <!-- /.col -->
         <div class="col-xs-4">

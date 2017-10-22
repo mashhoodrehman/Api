@@ -97,7 +97,7 @@ class PromotionController extends Controller
         if(isset($promotion->profile_id)){
             $promotion->total_score += $request->scores;
             $promotion->save();
-            return response()->json(["responseCode" => 200, "message" => "Score Updated"]);
+            return response()->json(["responseCode" => 200, "message" => "Score Updated",'scores'=> $promotion->total_score]);
         }
         else{
             $promotion = new user_score;
@@ -105,7 +105,7 @@ class PromotionController extends Controller
             $promotion->total_score = $request->scores;
             $promotion->api_token = $request->api_token;
             $promotion->save();
-            return response()->json(["responseCode" => 200, "message" => "Score Saved"]);
+            return response()->json(["responseCode" => 200, "message" => "Score Saved",'score'=>$promotion->total_score]);
         }
         
     }

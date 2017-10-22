@@ -40,7 +40,7 @@ class SignUpController extends Controller
            return response()
             ->json([
                 "responseCode" => 200,
-                'message' => 'Signup Successfuly!',"token"=>$api_token
+                'message' => 'Signup Successfuly!',"token"=>$api_token,'scores'=>$promotion->total_score
             ]);
         }
 
