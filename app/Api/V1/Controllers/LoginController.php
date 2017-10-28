@@ -24,12 +24,13 @@ class LoginController extends Controller
         $credentials = $request->only(['email', 'password']);
         if(isset($request->fb_login)){
             $user = User::where('social_login',$request->fb_login)->first();
-            $time = round(microtime(true) * 1000);
+            if(isset($user->social_login)){
+                $promotion = user_score::where('profile_id',$user->id)->first();
+                $time = round(microtime(true) * 1000);
                 $api_token = substr(md5($time), 0, 6);
                 $user->api_token = $api_token;
                 $user->save();
-            if(isset($user->social_login)){
-                return response()->json(["responseCode" => 200, "message" => "Logged in successull","token"=>$user->api_token]);
+                return response()->json(["responseCode" => 200, "message" => "Logged in Successfuly","token"=>$user->api_token,"scores"=>$promotion->total_score]);
             }
             else{
                 $user = new User;
@@ -41,10 +42,10 @@ class LoginController extends Controller
                 $user->save();
                 $promotion = new user_score;
                 $promotion->profile_id = $user->id;
-                $promotion->total_score = "50";
+                $promotion->total_score = "0";
                 $promotion->api_token = $user->api_token;
                 $promotion->save();
-                return response()->json(["responseCode" => 200, "message" => "Logged in successull","token"=>$user->api_token,"scores"=>$promotion->total_score]);
+                return response()->json(["responseCode" => 200, "message" => "Logged in Successfuly","token"=>$user->api_token,"scores"=>$promotion->total_score]);
             }
         }
 
