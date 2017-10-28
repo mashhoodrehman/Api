@@ -83,7 +83,6 @@ class LoginController extends Controller
                return response()->json(["responseCode" => 50, "message" => "User Not Active"]);
         }
         $score = user_score::where('profile_id',$user->id)->first();
-        dd($score);
         return response()
             ->json([
                 "responseCode" => 200,
