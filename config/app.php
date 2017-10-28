@@ -183,6 +183,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Junaidnasir\Larainvite\LaraInviteServiceProvider::class
 
     ],
 
@@ -239,6 +240,7 @@ return [
          * Package Facades...
          */
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'Invite'  => Junaidnasir\Larainvite\Facades\Invite::class,
 
     ],
 

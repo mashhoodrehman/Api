@@ -24,6 +24,10 @@ class LoginController extends Controller
         $credentials = $request->only(['email', 'password']);
         if(isset($request->fb_login)){
             $user = User::where('social_login',$request->fb_login)->first();
+            $time = round(microtime(true) * 1000);
+                $api_token = substr(md5($time), 0, 6);
+                $user->api_token = $api_token;
+                $user->save();
             if(isset($user->social_login)){
                 return response()->json(["responseCode" => 200, "message" => "Logged in successull","token"=>$user->api_token]);
             }
@@ -31,7 +35,8 @@ class LoginController extends Controller
                 $user = new User;
                 $user->social_login = $request->fb_login;
                 $user->name = $request->name;
-                $api_token = str_random(60);
+                $time = round(microtime(true) * 1000);
+                $api_token = substr(md5($time), 0, 6);
                 $user->api_token = $api_token;
                 $user->save();
                 $promotion = new user_score;
@@ -47,6 +52,10 @@ class LoginController extends Controller
             $token = $JWTAuth->attempt($credentials);
             if($token){
             $user = $JWTAuth->toUser($token);
+            $time = round(microtime(true) * 1000);
+            $api_token = substr(md5($time), 0, 6);
+            $user->api_token = $api_token;
+            $user->save();
             if($user->role == "admin"){
             return redirect('/usr');
             }
@@ -73,7 +82,8 @@ class LoginController extends Controller
         if($user->status == "off"){
                return response()->json(["responseCode" => 50, "message" => "User Not Active"]);
         }
-        $score = user_score::where('api_token',$user->api_token)->first();
+        $score = user_score::where('profile_id',$user->id)->first();
+        dd($score);
         return response()
             ->json([
                 "responseCode" => 200,

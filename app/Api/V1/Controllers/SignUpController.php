@@ -15,7 +15,8 @@ class SignUpController extends Controller
     public function signUp(SignUpRequest $request, JWTAuth $JWTAuth)
     {
         $user = new User($request->all());
-        $api_token = str_random(60);
+        $time = round(microtime(true) * 1000);
+        $api_token = substr(md5($time), 0, 6);
         $user->api_token = $api_token;
         $email = User::where('email',$user->email)->first();
         if($email){
@@ -24,6 +25,13 @@ class SignUpController extends Controller
                 "responseCode" => 500,
                 'message' => 'Signup Failed!'
             ]);
+        }
+        if(isset($request->invite_token)){
+            $promotion = user_score::where('api_token',$request->invite_token)->first();
+            if(!empty($promotion)){
+            $promotion->total_score += "50";
+            $promotion->save();
+        }
         }
          if(!$user->save()) {
             throw new HttpException(500);
@@ -34,7 +42,7 @@ class SignUpController extends Controller
         if(!Config::get('boilerplate.sign_up.release_token')) {
             $promotion = new user_score;
             $promotion->profile_id = $user->id;
-            $promotion->total_score = "50";
+            $promotion->total_score = "0";
             $promotion->api_token = $user->api_token;
             $promotion->save();
            return response()

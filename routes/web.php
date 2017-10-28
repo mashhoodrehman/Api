@@ -42,5 +42,7 @@ Route::get('/changePass','UserController@change');
 Route::get('/changestatus/{id}','UserController@changestatus');
 Route::post('/adminLogin','UserController@checkLogin');
 Route::post('/updateUser','UserController@updateUser');
+// Get Refresh Token Api
+Route::post('/apirefresh','UserController@refresApi');
 
 

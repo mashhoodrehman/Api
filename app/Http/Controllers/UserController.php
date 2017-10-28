@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Contracts\Auth\Guard;
 use Hash;
 use App\Http\Requests\Auth\LoginRequest;
+use App\user_score;
 
 class UserController extends Controller
 {
@@ -147,5 +148,27 @@ class UserController extends Controller
         }
         $user->save();
         return redirect('/usr');
+    }
+    public function refresApi(Request $request){
+        $user = User::where('api_token',$request->invite_token)->first();
+        if(empty($user)){
+            return response()
+            ->json([
+                "responseCode" => 500,
+                'message' => 'Token mismatch'
+            ]);
+        }
+        $time = round(microtime(true) * 1000);
+        $api_token = substr(md5($time), 0, 6);
+        $user->api_token = $api_token;
+        $user->save();
+        $promotion = user_score::where('profile_id',$user->id)->first();
+        $promotion->api_token = $api_token;
+        $promotion->save();
+        return response()
+            ->json([
+                "responseCode" => 200,
+                'message' => 'Token Refresh!',"token"=>$user->api_token,"scores"=>$promotion->total_score
+            ]);
     }
 }

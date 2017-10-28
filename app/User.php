@@ -5,10 +5,12 @@ namespace App;
 use Hash;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Junaidnasir\Larainvite\InviteTrait;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use InviteTrait;
 
     /**
      * The attributes that are mass assignable.

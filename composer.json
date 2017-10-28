@@ -12,7 +12,8 @@
         "barryvdh/laravel-cors": "^0.8.2",
         "yajra/laravel-datatables-oracle": "~8.0",
         "laravelcollective/html": "^5.2.0",
-        "bestmomo/nice-artisan": "1.0.*"
+        "bestmomo/nice-artisan": "1.0.*",
+        "junaidnasir/larainvite": "^0.1.10"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
