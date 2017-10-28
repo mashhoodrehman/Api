@@ -42,7 +42,12 @@ class SignUpController extends Controller
         if(!Config::get('boilerplate.sign_up.release_token')) {
             $promotion = new user_score;
             $promotion->profile_id = $user->id;
+             if(isset($request->invite_token)){
+            $promotion->total_score += "50";
+        }
+        else{
             $promotion->total_score = "0";
+        }
             $promotion->api_token = $user->api_token;
             $promotion->save();
            return response()
