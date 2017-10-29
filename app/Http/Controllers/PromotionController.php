@@ -64,10 +64,10 @@ class PromotionController extends Controller
 	            {
 	                $newFilename = "_img_" . time() . "_" . $file->getClientOriginalName();
 
-	                $destinationPath = public_path() . '/uploads/promotions/';
+	                $destinationPath = 'uploads/promotions';
 	                $file->move($destinationPath, $newFilename);
 	                $picPath = $newFilename;
-	                $promotion->image = $picPath . '/' . $destinationPath;
+	                $promotion->image = $destinationPath.$picPath ;
 	            }
 	        }
 
