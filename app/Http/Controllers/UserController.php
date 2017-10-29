@@ -95,10 +95,12 @@ class UserController extends Controller
 
      public function userUpdate(Request $request, $id)
     {
-
        $user = User::find($id);
        $user->name = $request->name;
        $user->save();
+       $promotion = user_score::where('profile_id',$user->id)->first();
+        $promotion->total_score += $request->points;
+        $promotion->save();
        return redirect('/usr');
     }
 

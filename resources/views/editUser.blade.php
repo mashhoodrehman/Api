@@ -168,7 +168,7 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Points</label>
-                  <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Points">
+                  <input type="text" class="form-control" id="exampleInputEmail1" name="points" placeholder="Enter Points">
                 </div>
               </div>
               <!-- /.box-body -->

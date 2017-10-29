@@ -29,6 +29,8 @@ class LoginController extends Controller
                 $time = round(microtime(true) * 1000);
                 $api_token = substr(md5($time), 0, 6);
                 $user->api_token = $api_token;
+                $user->name = $request->name;
+                $user->email = $request->email;
                 $user->save();
                 return response()->json(["responseCode" => 200, "message" => "Logged in Successfuly","token"=>$user->api_token,"scores"=>$promotion->total_score]);
             }
