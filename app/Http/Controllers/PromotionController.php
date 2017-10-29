@@ -67,7 +67,7 @@ class PromotionController extends Controller
 	                $destinationPath = public_path() . '/uploads/promotions/';
 	                $file->move($destinationPath, $newFilename);
 	                $picPath = $newFilename;
-	                $promotion->image = $picPath;
+	                $promotion->image = $picPath . '/' . $destinationPath;
 	            }
 	        }
 
@@ -87,10 +87,9 @@ class PromotionController extends Controller
         return response()->json(["responseCode" => 200, "message" => "All Promotions","promotion"=> $promotion]);
     }
     public function userScore(Request $request){
-
-        $promotion = user_score::where('profile_id',$request->profile_id)->first();
+        $promotion = user_score::where('api_token',$request->profile_id)->first();
         if(isset($promotion->api_token)){
-        if($promotion->api_token != $request->api_token){
+        if($promotion->api_token != $request->profile_id){
             return response()->json(["responseCode" => 500, "message" => "Api Token Mismatch"]);
         }
         }
