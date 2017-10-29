@@ -62,12 +62,12 @@ class PromotionController extends Controller
 	            $ext = $file->getClientOriginalExtension();
 	            if ($ext == 'jpg' || $ext == 'png' || $ext == 'jpeg') 
 	            {
-	                $newFilename = "_img_" . time() . "_" . $file->getClientOriginalName();
+	                $newFilename = $file->getClientOriginalName();
 
 	                $destinationPath = 'uploads/promotions';
 	                $file->move($destinationPath, $newFilename);
 	                $picPath = $newFilename;
-	                $promotion->image = $destinationPath.$picPath ;
+	                $promotion->image = $destinationPath.'/'.$picPath ;
 	            }
 	        }
 
