@@ -161,19 +161,19 @@
                 <!-- text input -->
                 <div class="form-group">
                   <label>Title</label>
-                  <input type="text" name="title" class="form-control" placeholder="Enter Title" required="">
+                  <input type="text" name="title" class="form-control" placeholder="Enter Title" >
                 </div>
                 <div class="form-group">
                   <label>Description</label>
-                  <input type="text" name="description" class="form-control" placeholder="Enter Description" required="">
+                  <input type="text" name="description" class="form-control" placeholder="Enter Description">
                 </div>
                 <div class="form-group">
                   <label>Link</label>
-                  <input type="text" name="link" class="form-control" placeholder="Enter Link" required="">
+                  <input type="text" name="link" class="form-control" placeholder="Enter Link">
                 </div>
                 <div class="form-group">
                   <label>Score</label>
-                  <input type="text" name="score" class="form-control" placeholder="Enter Score" required="">
+                  <input type="text" name="score" class="form-control" placeholder="Enter Score">
                 </div>
                 <div class="form-group">
                   <label>Select Type</label>
@@ -185,7 +185,7 @@
                 </div>
                 <div class="form-group">
                   <label>Image</label>
-                  <input type="file" name="file" class="form-control" placeholder="Enter Score" required="">
+                  <input type="file" name="file" class="form-control" placeholder="Enter Score">
                 </div>
                 <input type="submit" name="submit" class="btn btn-primary">
               </form>
